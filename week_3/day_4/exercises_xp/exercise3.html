@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Exercise 3 - Transform the sentence</title>
+</head>
+<body>
+
+<p id="text">
+  <strong>Hello</strong> I hope you are enjoying <strong>this</strong> class. At the
+  <strong>end</strong> you <strong>will</strong> be great Developers!
+  <strong>Enjoy</strong> the <strong>JavaScript</strong> lessons
+</p>
+
+<script>
+  //  1. Declare a global variable
+  let allBoldItems;
+
+  //  2. Function to collect all bold items inside the paragraph
+  function getBoldItems() {
+    allBoldItems = document.querySelectorAll('#text strong');
+  }
+
+  //  3. Function to highlight (change color to blue)
+  function highlight() {
+    allBoldItems.forEach(item => {
+      item.style.color = 'blue';
+    });
+  }
+
+  //  4. Function to return the color back to black
+  function returnItemsToDefault() {
+    allBoldItems.forEach(item => {
+      item.style.color = 'black';
+    });
+  }
+
+  //  Call getBoldItems once to store all <strong> elements
+  getBoldItems();
+
+  // 5. Add mouseover and mouseout events to the paragraph
+  const paragraph = document.getElementById('text');
+  paragraph.addEventListener('mouseover', highlight);
+  paragraph.addEventListener('mouseout', returnItemsToDefault);
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Exercise</title>
+</head>
+<body>
+
+<form id="userForm">
+  <label for="fname">First name:</label><br>
+  <input type="text" id="fname" name="firstname"><br>
+  <label for="lname">Last name:</label><br>
+  <input type="text" id="lname" name="lastname"><br><br>
+  <input type="submit" value="Submit" id="submit">
+</form> 
+
+<ul class="usersAnswer"></ul>
+
+<script>
+    // 1. Retrieve the form and log it
+    const form = document.getElementById('userForm');
+    console.log('Form:', form);
+
+    // 2. Retrieve inputs by their id and log them
+    const fnameInput = document.getElementById('fname');
+    const lnameInput = document.getElementById('lname');
+    console.log('Inputs by ID:', fnameInput, lnameInput);
+
+    // 3. Retrieve inputs by their name attribute and log them
+    const fnameByName = document.querySelector('input[name="firstname"]');
+    const lnameByName = document.querySelector('input[name="lastname"]');
+    console.log('Inputs by Name:', fnameByName, lnameByName);
+
+    // 4. Handle form submission
+    form.addEventListener('submit', function(event) {
+        event.preventDefault(); 
+        // preventDefault stops the form from submitting and reloading the page
+
+        const firstName = fnameInput.value.trim();
+        const lastName = lnameInput.value.trim();
+
+        if (firstName === "" || lastName === "") {
+            alert("Please fill in both fields!");
+            return; // stop execution if inputs are empty
+        }
+
+        const ul = document.querySelector('.usersAnswer');
+
+        // Create li for first name
+        const liFirst = document.createElement('li');
+        liFirst.textContent = firstName;
+        ul.appendChild(liFirst);
+
+        // Create li for last name
+        const liLast = document.createElement('li');
+        liLast.textContent = lastName;
+        ul.appendChild(liLast);
+
+        // Clear the inputs after submission
+        fnameInput.value = "";
+        lnameInput.value = "";
+    });
+</script>
+
+</body>
+</html>
