@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Challenge: Mad Libs</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      form {
+        margin-bottom: 20px;
+      }
+
+      label {
+        display: inline-block;
+        width: 120px;
+        margin-top: 5px;
+      }
+
+      input {
+        margin-bottom: 8px;
+        padding: 5px;
+      }
+
+      button {
+        margin-top: 10px;
+        padding: 6px 12px;
+        cursor: pointer;
+      }
+
+      #story {
+        font-weight: bold;
+        color: #333;
+      }
+    </style>
+  </head>
+  <body>
+
+    <h1>Mad Libs </h1>
+
+    <form id="libform">
+      <label for="noun">Noun:</label><input type="text" id="noun"><br>
+      <label for="adjective">Adjective:</label><input type="text" id="adjective"><br>
+      <label for="person">Someone's Name:</label><input type="text" id="person"><br>
+      <label for="verb">Verb:</label><input type="text" id="verb"><br>
+      <label for="place">A place:</label><input type="text" id="place"><br>
+      <button type="submit" id="lib-button">Lib it!</button>
+    </form>
+
+    <button id="shuffle-button" style="display:none;">🔀 Shuffle Story</button>
+
+    <p>Generated story: 
+      <span id="story"></span>
+    </p>
+
+    <script>
+      const form = document.getElementById('libform');
+      const storySpan = document.getElementById('story');
+      const shuffleBtn = document.getElementById('shuffle-button');
+
+      let userInputs = {};
+      let stories = [];
+
+      //  Generate different story templates
+      function generateStories(inputs) {
+        return [
+          `${inputs.person} took a ${inputs.adjective} ${inputs.noun} and decided to ${inputs.verb} in ${inputs.place}.`,
+          `In ${inputs.place}, ${inputs.person} found a ${inputs.noun} that was surprisingly ${inputs.adjective} and started to ${inputs.verb}.`,
+          `${inputs.person} couldn't believe their eyes when the ${inputs.adjective} ${inputs.noun} appeared in ${inputs.place} and made everyone ${inputs.verb}.`
+        ];
+      }
+
+      //  Form submit
+      form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const noun = document.getElementById('noun').value.trim();
+        const adjective = document.getElementById('adjective').value.trim();
+        const person = document.getElementById('person').value.trim();
+        const verb = document.getElementById('verb').value.trim();
+        const place = document.getElementById('place').value.trim();
+
+        //  Validate
+        if (!noun || !adjective || !person || !verb || !place) {
+          storySpan.textContent = "Please fill out all fields!";
+          storySpan.style.color = "red";
+          return;
+        }
+
+        storySpan.style.color = "#333";
+
+        // Save values
+        userInputs = { noun, adjective, person, verb, place };
+
+        // Generate stories
+        stories = generateStories(userInputs);
+
+        // Show a random one
+        showRandomStory();
+
+        // Show shuffle button
+        shuffleBtn.style.display = "inline-block";
+      });
+
+      // Shuffle button click
+      shuffleBtn.addEventListener('click', function() {
+        if (stories.length > 0) {
+          showRandomStory();
+        }
+      });
+
+      //  Function to pick a random story
+      function showRandomStory() {
+        const randomIndex = Math.floor(Math.random() * stories.length);
+        storySpan.textContent = stories[randomIndex];
+      }
+    </script>
+
+  </body>
+</html>
