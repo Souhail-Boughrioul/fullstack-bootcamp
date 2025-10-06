@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Fortune Teller</title>
+</head>
+<body>
+
+  <div id="fortune"></div>
+
+  <script>
+    //  Self-invoking function (IIFE)
+    (function (numChildren, partnerName, location, jobTitle) {
+      const message = `You will be a ${jobTitle} in ${location}, and married to ${partnerName} with ${numChildren} kids.`;
+      
+      // Display in the DOM
+      document.getElementById('fortune').textContent = message;
+    })(3, "Alex", "Paris", "Web Developer"); // Arguments passed here
+  </script>
+
+</body>
+</html>

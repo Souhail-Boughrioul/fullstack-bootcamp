@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Juice Bar</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+
+    .output {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #2a2a2a;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🍹 Juice Bar</h1>
+<div class="output" id="juiceOutput"></div>
+
+<script>
+  // =====================
+  // Part I
+  // =====================
+  function makeJuice(size) {
+    function addIngredients(ingredient1, ingredient2, ingredient3) {
+      const outputDiv = document.getElementById('juiceOutput');
+      outputDiv.innerHTML = `The client wants a ${size} juice, containing ${ingredient1}, ${ingredient2}, ${ingredient3}.`;
+    }
+
+    // Invoke inner function ONCE
+    addIngredients('apple', 'banana', 'orange');
+  }
+
+  // Invoke outer function in global scope
+  makeJuice('medium');
+
+  // =====================
+  // Part II
+  // =====================
+  function makeJuicePartII(size) {
+    const ingredients = [];
+
+    function addIngredients(ingredient1, ingredient2, ingredient3) {
+      ingredients.push(ingredient1, ingredient2, ingredient3);
+    }
+
+    function displayJuice() {
+      const outputDiv = document.getElementById('juiceOutput');
+      outputDiv.innerHTML = `The client wants a ${size} juice, containing ${ingredients.join(', ')}.`;
+    }
+
+    // Invoke addIngredients TWICE
+    addIngredients('apple', 'banana', 'orange');
+    addIngredients('kiwi', 'mango', 'pineapple');
+
+    // Invoke displayJuice once
+    displayJuice();
+  }
+
+  // Invoke outer function in global scope
+  makeJuicePartII('large');
+</script>
+
+</body>
+</html>

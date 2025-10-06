@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Welcome Navbar</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    /*  Navbar styling */
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #333;
+      color: white;
+      padding: 10px 20px;
+    }
+
+    nav .logo {
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    nav .user-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    nav .user-info img {
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <div class="logo"> MyWebsite</div>
+    <!--  User info will be added here by JS -->
+  </nav>
+
+  <script>
+    //  Self-invoking function (IIFE)
+    (function(userName) {
+      // Create container for user info
+      const userDiv = document.createElement('div');
+      userDiv.classList.add('user-info');
+
+      // Create img element
+      const img = document.createElement('img');
+      img.src = 'https://i.pravatar.cc/50'; // Random avatar
+
+      // Create name element
+      const name = document.createElement('span');
+      name.textContent = userName;
+
+      // Append elements
+      userDiv.appendChild(name);
+      userDiv.appendChild(img);
+
+      // Add to navbar
+      document.querySelector('nav').appendChild(userDiv);
+    })('John'); //  pass the username here
+  </script>
+
+</body>
+</html>
