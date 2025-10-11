@@ -38,7 +38,8 @@ body{
     width: 100vw;
     background-color: rgb(107, 21, 124);    
     min-height: 100vh;
-    position: relative;
+    background-image: url('./images/circuit-pattern.png');
+    background-position: center;
 }
 
 .main .cards{
