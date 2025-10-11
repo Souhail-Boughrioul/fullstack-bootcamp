@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form to JSON</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        input {
+            margin-bottom: 10px;
+        }
+        #output {
+            margin-top: 20px;
+            font-weight: bold;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Enter Your Details</h2>
+    <form id="userForm">
+        <label for="name">Name: </label>
+        <input type="text" id="name" name="name" required><br>
+
+        <label for="lname">Last Name: </label>
+        <input type="text" id="lname" name="lname" required><br>
+
+        <button type="submit">Send</button>
+    </form>
+
+    <div id="output"></div>
+
+    <script>
+        const form = document.getElementById('userForm');
+        const output = document.getElementById('output');
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent page reload
+
+            const nameInput = document.getElementById('name');
+            const lnameInput = document.getElementById('lname');
+
+            // Trim input values
+            const nameValue = nameInput.value.trim();
+            const lnameValue = lnameInput.value.trim();
+
+            const userData = {
+                name: nameValue,
+                lastName: lnameValue
+            };
+
+            // Display JSON on the page
+            output.textContent = JSON.stringify(userData, null, 2);
+
+            // Clear input fields manually
+            nameInput.value = '';
+            lnameInput.value = '';
+        });
+    </script>
+
+</body>
+</html>
