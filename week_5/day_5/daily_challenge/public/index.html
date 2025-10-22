@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Emoji Guessing Game 🎯</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      padding: 20px;
+      background-color: #f7f7f7;
+    }
+
+    h1 {
+      color: #333;
+    }
+
+    #game {
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      display: inline-block;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    #emoji {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #ddd;
+    }
+
+    #score, #feedback {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    #leaderboard {
+      margin-top: 20px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    input {
+      padding: 8px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      margin-right: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Emoji Guessing Game 🎮</h1>
+
+  <input id="playerName" placeholder="Enter your name">
+  <button onclick="startGame()">Start</button>
+
+  <div id="game" style="display:none">
+    <h2 id="emoji"></h2>
+    <div id="options"></div>
+    <p id="feedback"></p>
+    <p>Score: <span id="score">0</span></p>
+    <button onclick="saveScore()">Save Score</button>
+  </div>
+
+  <h3>Leaderboard</h3>
+  <ol id="leaderboard"></ol>
+
+<script>
+let correctAnswer = '';
+let score = 0;
+let player = '';
+
+async function loadQuestion() {
+  const res = await fetch('/question');
+  const data = await res.json();
+  correctAnswer = data.correct;
+  document.getElementById('emoji').textContent = data.emoji;
+
+  const optionsDiv = document.getElementById('options');
+  optionsDiv.innerHTML = '';
+  data.options.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.textContent = opt;
+    btn.onclick = () => submitGuess(opt);
+    optionsDiv.appendChild(btn);
+  });
+}
+
+async function submitGuess(guess) {
+  const res = await fetch('/guess', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({guess, correct: correctAnswer})
+  });
+  const data = await res.json();
+  score = data.score;
+  document.getElementById('score').textContent = score;
+  document.getElementById('feedback').textContent = data.correct ? '✅ Correct!' : '❌ Wrong!';
+  setTimeout(loadQuestion, 1000);
+}
+
+function startGame() {
+  player = document.getElementById('playerName').value.trim();
+  if(!player) return alert('Enter your name!');
+  document.getElementById('game').style.display='block';
+  loadQuestion();
+  fetchLeaderboard();
+}
+
+async function saveScore() {
+  const res = await fetch('/leaderboard', {
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({player})
+  });
+  const data = await res.json();
+  updateLeaderboard(data);
+}
+
+async function fetchLeaderboard() {
+  const res = await fetch('/leaderboard');
+  const data = await res.json();
+  updateLeaderboard(data);
+}
+
+function updateLeaderboard(list) {
+  const lb = document.getElementById('leaderboard');
+  lb.innerHTML = '';
+  list.forEach(entry => {
+    const li = document.createElement('li');
+    li.textContent = `${entry.player} - ${entry.score}`;
+    lb.appendChild(li);
+  });
+}
+</script>
+</body>
+</html>
