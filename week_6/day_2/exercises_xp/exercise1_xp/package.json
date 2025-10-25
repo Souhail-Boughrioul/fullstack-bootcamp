@@ -1,0 +1,16 @@
+{
+  "name": "exercise1_xp",
+  "version": "1.0.0",
+  "description": "Creating a Simple Express.js Application with Routes",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
