@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Do homework",
+    "description": "Math exercises",
+    "status": "pending",
+    "createdAt": "2025-10-26T16:07:30.011Z"
+  },
+  {
+    "id": 2,
+    "title": "go to gym",
+    "description": "Jog 5 kilometers around the park to improve stamina",
+    "status": "pending",
+    "createdAt": "2025-10-26T16:09:25.342Z"
+  }
+]

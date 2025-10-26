@@ -1,0 +1,16 @@
+{
+  "name": "task-management",
+  "version": "1.0.0",
+  "description": "Create a Task Management API with Express.js and JSON File Storage",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "name": "task-api",
+  "version": "1.0.0",
+  "description": "Create a User Management API with Registration and Login using Express.js, Bcrypt, and JSON File Storage",
+  "main": "index.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "express": "^5.1.0"
+  }
+}
